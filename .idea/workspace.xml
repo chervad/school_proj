@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="716bf1ea-b455-4ed0-8a80-4d7175a11a01" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/lesson01.py" beforeDir="false" afterPath="$PROJECT_DIR$/lesson01.py" afterDir="false" />
-    </list>
+    <list default="true" id="716bf1ea-b455-4ed0-8a80-4d7175a11a01" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/lesson01.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="18" selection-start-column="18" selection-end-column="18" />
+              <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -228,7 +226,7 @@
     <entry file="file://$PROJECT_DIR$/lesson01.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
+          <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
