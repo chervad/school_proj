@@ -13,6 +13,9 @@ arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "School project")
 arcade.set_background_color(arcade.color.GREEN)
 
 arcade.start_render()
+
+draw_pine(400, 300)
+
 arcade.finish_render()
 
 arcade.run()
