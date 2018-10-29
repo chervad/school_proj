@@ -1,25 +1,15 @@
-"""
-Asteroid Smasher
-
-Shoot space rocks in this demo program created with
-Python and the Arcade library.
-
-Artwork from http://kenney.nl
-
-If Python and Arcade are installed, this example can be run from the command line with:
-python -m arcade.examples.asteroid_smasher
-"""
+import arcade
 import random
 import math
-import arcade
 import os
+
 
 STARTING_ASTEROID_COUNT = 3
 SCALE = 0.5
 OFFSCREEN_SPACE = 300
+LEFT_LIMIT = -OFFSCREEN_SPACE
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-LEFT_LIMIT = -OFFSCREEN_SPACE
 RIGHT_LIMIT = SCREEN_WIDTH + OFFSCREEN_SPACE
 BOTTOM_LIMIT = -OFFSCREEN_SPACE
 TOP_LIMIT = SCREEN_HEIGHT + OFFSCREEN_SPACE
@@ -141,7 +131,7 @@ class MyGame(arcade.Window):
     """ Main application class. """
 
     def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "School project")
 
         # Set the working directory (where we expect to find files) to the same
         # directory this .py file is in. You can leave this out of your own
@@ -165,8 +155,25 @@ class MyGame(arcade.Window):
         self.player_sprite = None
         self.lives = 3
 
+        self.shape_list = None
+
         # Sounds
         self.laser_sound = arcade.load_sound("sounds/laser1.wav")
+
+        arcade.set_background_color(arcade.color.GREEN)
+
+
+    def setup(self):
+        self.shape_list = arcade.ShapeElementList()
+
+        for x in range(1, 5):
+            xx = random.randint(0, 700)
+            self.draw_house(xx, random.randint(120, 600))
+
+        for x in range(1, 5):
+            xx = random.randint(0, 720)
+            self.draw_pine(xx, random.randint(140, 600))
+
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -216,6 +223,18 @@ class MyGame(arcade.Window):
             enemy_sprite.size = 4
             self.all_sprites_list.append(enemy_sprite)
             self.asteroid_list.append(enemy_sprite)
+
+
+    def draw_pine(self, x, y):
+        arcade.draw_triangle_filled(x + 40, y - 40, x, y - 100, x + 80, y - 100, arcade.color.DARK_GREEN)
+        arcade.draw_triangle_filled(x + 40, y, x, y - 60, x + 80, y - 60, arcade.color.DARK_GREEN)
+        arcade.draw_lrtb_rectangle_filled(x + 30, x + 50, y - 100, y - 140, arcade.color.DARK_BROWN)
+
+
+    def draw_house(self, x, y):
+        arcade.draw_triangle_filled(x + 50, y, x, y - 60, x + 100, y - 60, arcade.color.DARK_RED)
+        arcade.draw_lrtb_rectangle_filled(x + 10, x + 90, y - 60, y - 120, arcade.color.DARK_BLUE)
+
 
     def on_draw(self):
         """
@@ -381,13 +400,3 @@ class MyGame(arcade.Window):
                     else:
                         self.game_over = True
                         print("Game over")
-
-
-def main():
-    window = MyGame()
-    window.start_new_game()
-    arcade.run()
-
-
-if __name__ == "__main__":
-    main()
