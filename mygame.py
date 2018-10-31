@@ -161,16 +161,16 @@ class MyGame(arcade.Window):
         # Sounds
         self.laser_sound = arcade.load_sound("sounds/laser1.wav")
 
-    def setup(self):
-        arcade.set_background_color(arcade.color.GREEN)
+    #def setup(self):
+        #arcade.set_background_color(arcade.color.GREEN)
 
         #for x in range(1, 5):
-#            xx = random.randint(0, 700)
-#            self.draw_house(xx, random.randint(120, 600))
+            #xx = random.randint(0, 700)
+            #self.draw_house(xx, random.randint(120, 600))
 
         #for x in range(1, 5):
         #    xx = random.randint(0, 720)
-        #zz    self.pine_list.append(self.create_pine(xx, random.randint(140, 600)))
+        #    self.pine_list.append(self.create_pine(xx, random.randint(140, 600)))
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -186,14 +186,16 @@ class MyGame(arcade.Window):
 
         # Set up the player
         self.score = 0
-        self.player_sprite = ShipSprite("images/playerShip1_orange.png", SCALE)
+        #self.player_sprite = ShipSprite("images/playerShip1_orange.png", SCALE)
+        self.player_sprite = ShipSprite("images/tank.png", SCALE)
         self.all_sprites_list.append(self.player_sprite)
         self.lives = 3
 
         # Set up the little icons that represent the player lives.
         cur_pos = 10
         for i in range(self.lives):
-            life = arcade.Sprite("images/playerLife1_orange.png", SCALE)
+            #life = arcade.Sprite("images/playerLife1_orange.png", SCALE)
+            life = arcade.Sprite("images/tank_mini.png", SCALE)
             life.center_x = cur_pos + life.width
             life.center_y = life.height
             cur_pos += life.width
@@ -201,10 +203,10 @@ class MyGame(arcade.Window):
             self.ship_life_list.append(life)
 
         # Make the asteroids
-        image_list = ("images/meteorGrey_big1.png",
-                      "images/meteorGrey_big2.png",
-                      "images/meteorGrey_big3.png",
-                      "images/meteorGrey_big4.png")
+        image_list = ("images/ufo.png",
+                      "images/ufo.png",
+                      "images/ufo.png",
+                      "images/ufo.png")
         for i in range(STARTING_ASTEROID_COUNT):
             image_no = random.randrange(4)
             enemy_sprite = AsteroidSprite(image_list[image_no], SCALE)
