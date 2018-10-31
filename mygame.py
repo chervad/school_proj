@@ -170,7 +170,7 @@ class MyGame(arcade.Window):
 
         #for x in range(1, 5):
         #    xx = random.randint(0, 720)
-        #    self.pine_list.append(self.create_pine(xx, random.randint(140, 600)))
+        #zz    self.pine_list.append(self.create_pine(xx, random.randint(140, 600)))
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
