@@ -23,6 +23,7 @@ def main():
     #arcade.run()
 
     window = mygame.MyGame()
+    window.setup()
     window.start_new_game()
 
     arcade.run()

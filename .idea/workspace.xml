@@ -3,23 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="716bf1ea-b455-4ed0-8a80-4d7175a11a01" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/asteroid_smasher.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/asteroid_smasher.spec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/laserBlue01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_big1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_big2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_big3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_big4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_med1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_med2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_small1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_small2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_tiny1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/meteorGrey_tiny2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/playerLife1_orange.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/images/playerShip1_orange.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01/sounds/laser1.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygame.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygame.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -78,34 +63,33 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mygame.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mygame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="166" column="40" lean-forward="true" selection-start-line="166" selection-start-column="40" selection-end-line="166" selection-end-column="40" />
+            <state relative-caret-position="357">
+              <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#4529#6422#0" />
-                <element signature="e#6664#7929#0" />
-                <element signature="e#7988#8367#0" />
-                <element signature="e#8433#10984#0" />
-                <element signature="e#11019#12465#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="buffered_draw_commands.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mygame.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mygame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="172" column="9" selection-start-line="172" selection-start-column="9" selection-end-line="172" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#4948#6841#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="buffered_draw_commands.py" pinned="false" current-in-tab="false">
         <entry file="file://C:/Python37/Lib/site-packages/arcade/buffered_draw_commands.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
-              <caret line="743" column="8" selection-start-line="743" selection-start-column="8" selection-end-line="743" selection-end-column="8" />
+            <state relative-caret-position="-1727">
+              <caret line="459" column="71" lean-forward="true" selection-start-line="459" selection-start-column="71" selection-end-line="459" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -125,6 +109,8 @@
       <find>respawning</find>
       <find>create_rectangles_filled_with_colors</find>
       <find>self.lives</find>
+      <find>bullet_list</find>
+      <find>all_sprites_list</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -141,10 +127,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1911" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="1910" />
+    <option name="y" value="-10" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -257,22 +243,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1913" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14192708" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29931036" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29931036" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
@@ -281,6 +268,59 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python37/Lib/site-packages/arcade/buffered_draw_commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14560">
+          <caret line="738" column="22" lean-forward="true" selection-start-line="738" selection-start-column="22" selection-end-line="738" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mygame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3200">
+          <caret line="163" column="55" lean-forward="true" selection-start-line="163" selection-start-column="55" selection-end-line="163" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#4948#6841#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mygame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3260">
+          <caret line="166" column="40" lean-forward="true" selection-start-line="166" selection-start-column="40" selection-end-line="166" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#4948#6841#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python37/Lib/site-packages/arcade/buffered_draw_commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14660">
+          <caret line="743" column="8" selection-start-line="743" selection-start-column="8" selection-end-line="743" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -303,16 +343,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/01/asteroid_smasher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="391" column="26" lean-forward="true" selection-start-line="391" selection-start-column="26" selection-end-line="391" selection-end-column="26" />
-          <folding>
-            <element signature="e#272#285#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/01/asteroid_smasher.py" />
     <entry file="file://$PROJECT_DIR$/images/playerShip1_orange.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -339,31 +370,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python37/Lib/site-packages/arcade/window_commands.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-67">
-          <caret line="184" column="4" selection-start-line="184" selection-start-column="4" selection-end-line="184" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python37/Lib/site-packages/arcade/examples/move_keyboard.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
           <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python37/Lib/site-packages/arcade/application.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -374,25 +384,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mygame.py">
+    <entry file="file://C:/Python37/Lib/site-packages/arcade/window_commands.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="166" column="40" lean-forward="true" selection-start-line="166" selection-start-column="40" selection-end-line="166" selection-end-column="40" />
+        <state relative-caret-position="60">
+          <caret line="183" lean-forward="true" selection-start-line="183" selection-end-line="183" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python37/Lib/site-packages/pyglet/window/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2693">
+          <caret line="1767" column="4" selection-start-line="1767" selection-start-column="4" selection-end-line="1767" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python37/Lib/site-packages/arcade/application.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#4529#6422#0" />
-            <element signature="e#6664#7929#0" />
-            <element signature="e#7988#8367#0" />
-            <element signature="e#8433#10984#0" />
-            <element signature="e#11019#12465#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://C:/Python37/Lib/site-packages/arcade/buffered_draw_commands.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="743" column="8" selection-start-line="743" selection-start-column="8" selection-end-line="743" selection-end-column="8" />
+        <state relative-caret-position="-1727">
+          <caret line="459" column="71" lean-forward="true" selection-start-line="459" selection-start-column="71" selection-end-line="459" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mygame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="172" column="9" selection-start-line="172" selection-start-column="9" selection-end-line="172" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#4948#6841#0" />
+          </folding>
         </state>
       </provider>
     </entry>
