@@ -3,10 +3,9 @@ import random
 import math
 import os
 
-
 STARTING_ASTEROID_COUNT = 3
 SCALE = 0.5
-OFFSCREEN_SPACE = 300
+OFFSCREEN_SPACE = 200 # 300
 LEFT_LIMIT = -OFFSCREEN_SPACE
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -17,6 +16,7 @@ TOP_LIMIT = SCREEN_HEIGHT + OFFSCREEN_SPACE
 
 class TurningSprite(arcade.Sprite):
     """ Sprite that sets its angle to the direction it is traveling in. """
+
     def update(self):
         super().update()
         self.angle = math.degrees(math.atan2(self.change_y, self.change_x))
@@ -28,6 +28,7 @@ class ShipSprite(arcade.Sprite):
 
     Derives from arcade.Sprite.
     """
+
     def __init__(self, filename, scale):
         """ Set up the space ship. """
 
@@ -137,7 +138,6 @@ class MyGame(arcade.Window):
         # directory this .py file is in. You can leave this out of your own
         # code, but it is needed to easily run the examples using "python -m"
         # as mentioned at the top of this program.
-        self.pine_list = []
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
 
@@ -161,16 +161,16 @@ class MyGame(arcade.Window):
         # Sounds
         self.laser_sound = arcade.load_sound("sounds/laser1.wav")
 
-    #def setup(self):
-        #arcade.set_background_color(arcade.color.GREEN)
+    # def setup(self):
+    # arcade.set_background_color(arcade.color.GREEN)
 
-        #for x in range(1, 5):
-            #xx = random.randint(0, 700)
-            #self.draw_house(xx, random.randint(120, 600))
+    # for x in range(1, 5):
+    # xx = random.randint(0, 700)
+    # self.draw_house(xx, random.randint(120, 600))
 
-        #for x in range(1, 5):
-        #    xx = random.randint(0, 720)
-        #    self.pine_list.append(self.create_pine(xx, random.randint(140, 600)))
+    # for x in range(1, 5):
+    #    xx = random.randint(0, 720)
+    #    self.pine_list.append(self.create_pine(xx, random.randint(140, 600)))
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -186,7 +186,6 @@ class MyGame(arcade.Window):
 
         # Set up the player
         self.score = 0
-        #self.player_sprite = ShipSprite("images/playerShip1_orange.png", SCALE)
         self.player_sprite = ShipSprite("images/tank.png", SCALE)
         self.all_sprites_list.append(self.player_sprite)
         self.lives = 3
@@ -194,7 +193,6 @@ class MyGame(arcade.Window):
         # Set up the little icons that represent the player lives.
         cur_pos = 10
         for i in range(self.lives):
-            #life = arcade.Sprite("images/playerLife1_orange.png", SCALE)
             life = arcade.Sprite("images/tank_mini.png", SCALE)
             life.center_x = cur_pos + life.width
             life.center_y = life.height
@@ -203,16 +201,11 @@ class MyGame(arcade.Window):
             self.ship_life_list.append(life)
 
         # Make the asteroids
-        image_list = ("images/ufo.png",
-                      "images/ufo.png",
-                      "images/ufo.png",
-                      "images/ufo.png")
         for i in range(STARTING_ASTEROID_COUNT):
-            image_no = random.randrange(4)
-            enemy_sprite = AsteroidSprite(image_list[image_no], SCALE)
+            enemy_sprite = AsteroidSprite("images/ufo.png", SCALE)
             enemy_sprite.guid = "Asteroid"
 
-            enemy_sprite.center_y = random.randrange(BOTTOM_LIMIT, TOP_LIMIT)
+            enemy_sprite.center_y = 0 # random.randrange(BOTTOM_LIMIT, TOP_LIMIT)
             enemy_sprite.center_x = random.randrange(LEFT_LIMIT, RIGHT_LIMIT)
 
             enemy_sprite.change_x = random.random() * 2 - 1
@@ -240,9 +233,6 @@ class MyGame(arcade.Window):
 
         output = f"Asteroid Count: {len(self.asteroid_list)}"
         arcade.draw_text(output, 10, 50, arcade.color.WHITE, 13)
-
-        for pine in self.pine_list:
-            pine.draw()
 
     def on_key_press(self, symbol, modifiers):
         """ Called whenever a key is pressed. """
@@ -287,73 +277,6 @@ class MyGame(arcade.Window):
         elif symbol == arcade.key.DOWN:
             self.player_sprite.thrust = 0
 
-    def split_asteroid(self, asteroid: AsteroidSprite):
-        """ Split an asteroid into chunks. """
-        x = asteroid.center_x
-        y = asteroid.center_y
-        self.score += 1
-
-        if asteroid.size == 4:
-            for i in range(3):
-                image_no = random.randrange(2)
-                image_list = ["images/meteorGrey_med1.png",
-                              "images/meteorGrey_med2.png"]
-
-                enemy_sprite = AsteroidSprite(image_list[image_no],
-                                              SCALE * 1.5)
-
-                enemy_sprite.center_y = y
-                enemy_sprite.center_x = x
-
-                enemy_sprite.change_x = random.random() * 2.5 - 1.25
-                enemy_sprite.change_y = random.random() * 2.5 - 1.25
-
-                enemy_sprite.change_angle = (random.random() - 0.5) * 2
-                enemy_sprite.size = 3
-
-                self.all_sprites_list.append(enemy_sprite)
-                self.asteroid_list.append(enemy_sprite)
-        elif asteroid.size == 3:
-            for i in range(3):
-                image_no = random.randrange(2)
-                image_list = ["images/meteorGrey_small1.png",
-                              "images/meteorGrey_small2.png"]
-
-                enemy_sprite = AsteroidSprite(image_list[image_no],
-                                              SCALE * 1.5)
-
-                enemy_sprite.center_y = y
-                enemy_sprite.center_x = x
-
-                enemy_sprite.change_x = random.random() * 3 - 1.5
-                enemy_sprite.change_y = random.random() * 3 - 1.5
-
-                enemy_sprite.change_angle = (random.random() - 0.5) * 2
-                enemy_sprite.size = 2
-
-                self.all_sprites_list.append(enemy_sprite)
-                self.asteroid_list.append(enemy_sprite)
-        elif asteroid.size == 2:
-            for i in range(3):
-                image_no = random.randrange(2)
-                image_list = ["images/meteorGrey_tiny1.png",
-                              "images/meteorGrey_tiny2.png"]
-
-                enemy_sprite = AsteroidSprite(image_list[image_no],
-                                              SCALE * 1.5)
-
-                enemy_sprite.center_y = y
-                enemy_sprite.center_x = x
-
-                enemy_sprite.change_x = random.random() * 3.5 - 1.75
-                enemy_sprite.change_y = random.random() * 3.5 - 1.75
-
-                enemy_sprite.change_angle = (random.random() - 0.5) * 2
-                enemy_sprite.size = 1
-
-                self.all_sprites_list.append(enemy_sprite)
-                self.asteroid_list.append(enemy_sprite)
-
     def update(self, x):
         """ Move everything """
 
@@ -373,7 +296,6 @@ class MyGame(arcade.Window):
                 asteroids = asteroids_spatial
 
                 for asteroid in asteroids:
-                    self.split_asteroid(asteroid)
                     asteroid.kill()
                     bullet.kill()
 
@@ -383,7 +305,6 @@ class MyGame(arcade.Window):
                     if self.lives > 0:
                         self.lives -= 1
                         self.player_sprite.respawn()
-                        self.split_asteroid(asteroids[0])
                         asteroids[0].kill()
                         self.ship_life_list.pop().kill()
                         print("Crash")
