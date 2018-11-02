@@ -2,24 +2,28 @@ import arcade
 import random
 import math
 import os
+import threading
 
 STARTING_ASTEROID_COUNT = 3
+PAIN_COUNT = 5
+HOUSE_COUNT = 4
+CAR_COUNT = 3
 SCALE = 0.5
-OFFSCREEN_SPACE = 200 # 300
-LEFT_LIMIT = 0 # -OFFSCREEN_SPACE
+OFFSCREEN_SPACE = 200  # 300
+LEFT_LIMIT = 0  # -OFFSCREEN_SPACE
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-RIGHT_LIMIT = SCREEN_WIDTH # + OFFSCREEN_SPACE
+RIGHT_LIMIT = SCREEN_WIDTH  # + OFFSCREEN_SPACE
 BOTTOM_LIMIT = -OFFSCREEN_SPACE
 TOP_LIMIT = SCREEN_HEIGHT + OFFSCREEN_SPACE
 
 
-class TurningSprite(arcade.Sprite):
-    """ Sprite that sets its angle to the direction it is traveling in. """
-
-    def update(self):
-        super().update()
-        self.angle = math.degrees(math.atan2(self.change_y, self.change_x))
+# class TurningSprite(arcade.Sprite):
+#     """ Sprite that sets its angle to the direction it is traveling in. """
+#
+#     def update(self):
+#         super().update()
+#         self.angle = math.degrees(math.atan2(self.change_y, self.change_x))
 
 
 class ShipSprite(arcade.Sprite):
@@ -99,6 +103,27 @@ class AsteroidSprite(arcade.Sprite):
     def __init__(self, image_file_name, scale):
         super().__init__(image_file_name, scale=scale)
         self.size = 0
+        self.bullet_list = arcade.SpriteList()
+        self.blast_trd = threading.Timer(2, self._blast)
+        self.blast_trd.start()
+
+    def __del__(self):
+        self.blast_trd.cancel()
+
+    def _blast(self):
+        print("Blast!")
+        bullet_sprite = BulletSprite("images/laserBlue01.png", SCALE)
+        bullet_sprite.guid = "Bullet UFO"
+
+        bullet_speed = 10
+        bullet_sprite.change_y = math.cos(math.radians(random.randrange(180, 360))) * bullet_speed
+        bullet_sprite.change_x = math.sin(math.radians(random.randrange(180, 360))) * bullet_speed
+
+        bullet_sprite.center_x = self.center_x
+        bullet_sprite.center_y = self.center_y
+        bullet_sprite.update()
+
+        self.bullet_list.append(bullet_sprite)
 
     def update(self):
         """ Move the asteroid around. """
@@ -113,7 +138,7 @@ class AsteroidSprite(arcade.Sprite):
             self.center_y = TOP_LIMIT
 
 
-class BulletSprite(TurningSprite):
+class BulletSprite(arcade.Sprite):  # TurningSprite):
     """
     Class that represents a bullet.
 
@@ -123,9 +148,17 @@ class BulletSprite(TurningSprite):
 
     def update(self):
         super().update()
+        self.angle = math.degrees(math.atan2(self.change_y, self.change_x))
         if self.center_x < -100 or self.center_x > 1500 or \
                 self.center_y > 1100 or self.center_y < -100:
             self.kill()
+
+
+class CarSprite(arcade.Sprite):
+    """ Sprite that represents an car. """
+
+    def __init__(self, image_file_name, scale):
+        super().__init__(image_file_name, scale=scale)
 
 
 class MyGame(arcade.Window):
@@ -150,6 +183,7 @@ class MyGame(arcade.Window):
         self.asteroid_list = None
         self.bullet_list = None
         self.ship_life_list = None
+        self.car_list = None
 
         # Set up the player
         self.score = 0
@@ -161,16 +195,7 @@ class MyGame(arcade.Window):
         # Sounds
         self.laser_sound = arcade.load_sound("sounds/laser1.wav")
 
-    # def setup(self):
-    # arcade.set_background_color(arcade.color.GREEN)
-
-    # for x in range(1, 5):
-    # xx = random.randint(0, 700)
-    # self.draw_house(xx, random.randint(120, 600))
-
-    # for x in range(1, 5):
-    #    xx = random.randint(0, 720)
-    #    self.pine_list.append(self.create_pine(xx, random.randint(140, 600)))
+        arcade.set_background_color(arcade.color.DARK_GREEN)
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -183,6 +208,29 @@ class MyGame(arcade.Window):
         self.asteroid_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
         self.ship_life_list = arcade.SpriteList()
+        self.car_list = arcade.SpriteList()
+
+        for i in range(HOUSE_COUNT):
+            house_sprite = arcade.Sprite("images/house.png")
+            house_sprite.center_x = random.randrange((SCREEN_WIDTH // HOUSE_COUNT) * i + 60
+                                                     , (SCREEN_WIDTH // HOUSE_COUNT) * (i + 1) - 60)
+            house_sprite.center_y = random.randrange(160, SCREEN_HEIGHT - 280)
+            self.all_sprites_list.append(house_sprite)
+
+        for i in range(PAIN_COUNT):
+            pain_sprite = arcade.Sprite("images/pine.png")
+            pain_sprite.center_x = random.randrange((SCREEN_WIDTH // PAIN_COUNT) * i + 30
+                                                    , (SCREEN_WIDTH // HOUSE_COUNT) * (i + 1) - 30)
+            pain_sprite.center_y = random.randrange(120, SCREEN_HEIGHT - 300)
+            self.all_sprites_list.append(pain_sprite)
+
+        for i in range(CAR_COUNT):
+            car_sprite = CarSprite("images/auto_00.png", SCALE)
+            car_sprite.center_x = random.randrange((SCREEN_WIDTH // CAR_COUNT) * i + 120
+                                                   , (SCREEN_WIDTH // CAR_COUNT) * (i + 1) - 120)
+            car_sprite.center_y = random.randrange(65, SCREEN_HEIGHT - 265)
+            self.all_sprites_list.append(car_sprite)
+            self.car_list.append(car_sprite)
 
         # Set up the player
         self.score = 0
@@ -215,6 +263,7 @@ class MyGame(arcade.Window):
             # enemy_sprite.size = 4
             self.all_sprites_list.append(enemy_sprite)
             self.asteroid_list.append(enemy_sprite)
+            # self.all_sprites_list.append(life)
 
     def on_draw(self):
         """
@@ -226,6 +275,8 @@ class MyGame(arcade.Window):
 
         # Draw all the sprites.
         self.all_sprites_list.draw()
+        for asteroid in self.asteroid_list:
+            asteroid.bullet_list.draw()
 
         # Put the text on the screen.
         output = f"Score: {self.score}"
