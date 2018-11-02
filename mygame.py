@@ -6,10 +6,10 @@ import os
 STARTING_ASTEROID_COUNT = 3
 SCALE = 0.5
 OFFSCREEN_SPACE = 200 # 300
-LEFT_LIMIT = -OFFSCREEN_SPACE
+LEFT_LIMIT = 0 # -OFFSCREEN_SPACE
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-RIGHT_LIMIT = SCREEN_WIDTH + OFFSCREEN_SPACE
+RIGHT_LIMIT = SCREEN_WIDTH # + OFFSCREEN_SPACE
 BOTTOM_LIMIT = -OFFSCREEN_SPACE
 TOP_LIMIT = SCREEN_HEIGHT + OFFSCREEN_SPACE
 
@@ -52,21 +52,21 @@ class ShipSprite(arcade.Sprite):
         'respawning' is an invulnerability timer.
         """
         # If we are in the middle of respawning, this is non-zero.
-        self.respawning = 1
+        # self.respawning = 1
         self.center_x = SCREEN_WIDTH / 2
-        self.center_y = SCREEN_HEIGHT / 2
+        self.center_y = 20
         self.angle = 0
 
     def update(self):
         """
         Update our position and other particulars.
         """
-        if self.respawning:
-            self.respawning += 1
-            self.alpha = self.respawning / 500.0
-            if self.respawning > 250:
-                self.respawning = 0
-                self.alpha = 1
+        # if self.respawning:
+        #    self.respawning += 1
+        #    self.alpha = self.respawning / 500.0
+        #    if self.respawning > 250:
+        #        self.respawning = 0
+        #        self.alpha = 1
         if self.speed > 0:
             self.speed -= self.drag
             if self.speed < 0:
@@ -83,8 +83,8 @@ class ShipSprite(arcade.Sprite):
         if self.speed < -self.max_speed:
             self.speed = -self.max_speed
 
-        self.change_x = -math.sin(math.radians(self.angle)) * self.speed
-        self.change_y = math.cos(math.radians(self.angle)) * self.speed
+        # self.change_x = -math.sin(math.radians(self.angle)) * self.speed
+        # self.change_y = math.cos(math.radians(self.angle)) * self.speed
 
         self.center_x += self.change_x
         self.center_y += self.change_y
@@ -205,14 +205,14 @@ class MyGame(arcade.Window):
             enemy_sprite = AsteroidSprite("images/ufo.png", SCALE)
             enemy_sprite.guid = "Asteroid"
 
-            enemy_sprite.center_y = 0 # random.randrange(BOTTOM_LIMIT, TOP_LIMIT)
+            enemy_sprite.center_y = TOP_LIMIT # random.randrange(BOTTOM_LIMIT, TOP_LIMIT)
             enemy_sprite.center_x = random.randrange(LEFT_LIMIT, RIGHT_LIMIT)
 
             enemy_sprite.change_x = random.random() * 2 - 1
-            enemy_sprite.change_y = random.random() * 2 - 1
+            enemy_sprite.change_y = - random.randrange(1, 4)
 
-            enemy_sprite.change_angle = (random.random() - 0.5) * 2
-            enemy_sprite.size = 4
+            # enemy_sprite.change_angle = (random.random() - 0.5) * 2
+            # enemy_sprite.size = 4
             self.all_sprites_list.append(enemy_sprite)
             self.asteroid_list.append(enemy_sprite)
 
@@ -258,24 +258,28 @@ class MyGame(arcade.Window):
             # arcade.play_sound(self.laser_sound)
 
         if symbol == arcade.key.LEFT:
-            self.player_sprite.change_angle = 3
+            # self.player_sprite.change_angle = 3
+            self.player_sprite.change_x -= 2
         elif symbol == arcade.key.RIGHT:
-            self.player_sprite.change_angle = -3
-        elif symbol == arcade.key.UP:
-            self.player_sprite.thrust = 0.15
-        elif symbol == arcade.key.DOWN:
-            self.player_sprite.thrust = -.2
+            # self.player_sprite.change_angle = -3
+            self.player_sprite.change_x = 2
+        # elif symbol == arcade.key.UP:
+        #    self.player_sprite.thrust = 0.15
+        # elif symbol == arcade.key.DOWN:
+        #    self.player_sprite.thrust = -.2
 
     def on_key_release(self, symbol, modifiers):
         """ Called whenever a key is released. """
         if symbol == arcade.key.LEFT:
-            self.player_sprite.change_angle = 0
+            # self.player_sprite.change_angle = 0
+            self.player_sprite.change_x = 0
         elif symbol == arcade.key.RIGHT:
-            self.player_sprite.change_angle = 0
-        elif symbol == arcade.key.UP:
-            self.player_sprite.thrust = 0
-        elif symbol == arcade.key.DOWN:
-            self.player_sprite.thrust = 0
+            # self.player_sprite.change_angle = 0
+            self.player_sprite.change_x = 0
+        # elif symbol == arcade.key.UP:
+        #    self.player_sprite.thrust = 0
+        # elif symbol == arcade.key.DOWN:
+        #    self.player_sprite.thrust = 0
 
     def update(self, x):
         """ Move everything """
