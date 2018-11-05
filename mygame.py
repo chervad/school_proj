@@ -2,7 +2,6 @@ import arcade
 import random
 import math
 import os
-import threading
 
 STARTING_ASTEROID_COUNT = 3
 PAIN_COUNT = 5
@@ -104,26 +103,6 @@ class AsteroidSprite(arcade.Sprite):
         super().__init__(image_file_name, scale=scale)
         self.size = 0
         self.bullet_list = arcade.SpriteList()
-        self.blast_trd = threading.Timer(2, self._blast)
-        self.blast_trd.start()
-
-    def __del__(self):
-        self.blast_trd.cancel()
-
-    def _blast(self):
-        print("Blast!")
-        bullet_sprite = BulletSprite("images/laserBlue01.png", SCALE)
-        bullet_sprite.guid = "Bullet UFO"
-
-        bullet_speed = 10
-        bullet_sprite.change_y = math.cos(math.radians(random.randrange(180, 360))) * bullet_speed
-        bullet_sprite.change_x = math.sin(math.radians(random.randrange(180, 360))) * bullet_speed
-
-        bullet_sprite.center_x = self.center_x
-        bullet_sprite.center_y = self.center_y
-        bullet_sprite.update()
-
-        self.bullet_list.append(bullet_sprite)
 
     def update(self):
         """ Move the asteroid around. """
@@ -149,8 +128,7 @@ class BulletSprite(arcade.Sprite):  # TurningSprite):
     def update(self):
         super().update()
         self.angle = math.degrees(math.atan2(self.change_y, self.change_x))
-        if self.center_x < -100 or self.center_x > 1500 or \
-                self.center_y > 1100 or self.center_y < -100:
+        if self.center_x < -100 or self.center_x > 1500 or self.center_y > 1100 or self.center_y < -100:
             self.kill()
 
 
@@ -159,6 +137,7 @@ class CarSprite(arcade.Sprite):
 
     def __init__(self, image_file_name, scale):
         super().__init__(image_file_name, scale=scale)
+        self.max_life = 4
 
 
 class MyGame(arcade.Window):
@@ -182,6 +161,7 @@ class MyGame(arcade.Window):
         self.all_sprites_list = None
         self.asteroid_list = None
         self.bullet_list = None
+        self.enemy_bullet_list = None
         self.ship_life_list = None
         self.car_list = None
 
@@ -207,6 +187,8 @@ class MyGame(arcade.Window):
         self.all_sprites_list = arcade.SpriteList()
         self.asteroid_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
+        self.enemy_bullet_list = arcade.SpriteList()
+
         self.ship_life_list = arcade.SpriteList()
         self.car_list = arcade.SpriteList()
 
@@ -337,6 +319,22 @@ class MyGame(arcade.Window):
 
         self.frame_count += 1
 
+        if self.frame_count % 20 == 0:
+            for asteroid in self.asteroid_list:
+                bullet_sprite = BulletSprite("images/laserBlue01.png", SCALE)
+                bullet_sprite.guid = "Bullet UFO"
+
+                bullet_speed = 8
+                bullet_sprite.change_y = -math.sin(math.radians(random.randrange(45, 135))) * bullet_speed
+                bullet_sprite.change_x = math.cos(math.radians(random.randrange(45, 135))) * bullet_speed
+
+                bullet_sprite.center_x = asteroid.center_x
+                bullet_sprite.center_y = asteroid.center_y
+                bullet_sprite.update()
+
+                self.all_sprites_list.append(bullet_sprite)
+                self.enemy_bullet_list.append(bullet_sprite)
+
         if not self.game_over:
             self.all_sprites_list.update()
 
@@ -353,6 +351,36 @@ class MyGame(arcade.Window):
                 for asteroid in asteroids:
                     asteroid.kill()
                     bullet.kill()
+
+            for bullet in self.enemy_bullet_list:
+                player_shoot = arcade.check_for_collision(bullet, self.player_sprite)
+                if player_shoot:
+                    bullet.kill()
+                    if self.lives > 0:
+                        self.lives -= 1
+                        self.player_sprite.respawn()
+                        self.ship_life_list.pop().kill()
+                        print("Crash")
+                    else:
+                        self.game_over = True
+                        print("Game over")
+
+            for bullet in self.enemy_bullet_list:
+                cars_spatial = arcade.check_for_collision_with_list(bullet, self.car_list)
+
+                for car in cars_spatial:
+                    bullet.kill()
+                    if car.max_life > 0:
+                        buf = "images/auto_0%d.png" % (4 - car.max_life)
+                        new_car = CarSprite(buf, SCALE)
+                        new_car.center_x = car.center_x
+                        new_car.center_y = car.center_y
+                        new_car.max_life = car.max_life - 1
+                        self.all_sprites_list.append(new_car)
+                        self.car_list.append(new_car)
+                        car.kill()
+                    else:
+                        car.kill()
 
             if not self.player_sprite.respawning:
                 asteroids = arcade.check_for_collision_with_list(self.player_sprite, self.asteroid_list)
