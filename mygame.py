@@ -105,7 +105,8 @@ class AsteroidSprite(arcade.Sprite):
         self.size = 0
         self.bullet_list = arcade.SpriteList()
         self.blast_trd = threading.Timer(2, self._blast)
-        self.blast_trd.start()
+
+        
 
     def __del__(self):
         self.blast_trd.cancel()
